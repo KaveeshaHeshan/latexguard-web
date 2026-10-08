@@ -1,0 +1,231 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --brand: #0bb524;
+    --brand-deep: #07751a;
+    --brand-soft: rgba(11, 181, 36, 0.1);
+
+    --ink: #101612;
+    --text: #2a322c;
+    --muted: #566058;
+    --line: #e1e7e2;
+    --wash: #f6f8f6;
+    --card: #ffffff;
+    --white: #ffffff;
+
+    --grade-a: #059669;
+    --grade-b: #d97706;
+    --grade-c: #dc2626;
+
+    --font-heading: var(--font-bricolage), sans-serif;
+    --font-body: var(--font-figtree), sans-serif;
+    --font-mono: var(--font-ibm-mono), monospace;
+  }
+
+  [data-theme="dark"] {
+    --brand: #10d42d;
+    --brand-deep: #0bb524;
+    --brand-soft: rgba(16, 212, 45, 0.15);
+
+    --ink: #f0f4f1;
+    --text: #d2ded5;
+    --muted: #8fa193;
+    --line: #223026;
+    --wash: #0c120d;
+    --card: #141c15;
+    --white: #141c15;
+  }
+}
+
+@theme {
+  --color-brand: var(--brand);
+  --color-brand-deep: var(--brand-deep);
+  --color-brand-soft: var(--brand-soft);
+  --color-ink: var(--ink);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-wash: var(--wash);
+  --color-card: var(--card);
+  --color-grade-a: var(--grade-a);
+  --color-grade-b: var(--grade-b);
+  --color-grade-c: var(--grade-c);
+
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+  font-family: var(--font-body);
+  color: var(--text);
+  background-color: var(--wash);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--wash);
+  color: var(--text);
+  font-size: 1.0625rem; /* 17px */
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+code, pre, .font-mono {
+  font-family: var(--font-mono);
+}
+
+/* WCAG 2.2 AA Focus ring */
+*:focus-visible {
+  outline: 3px solid var(--brand-deep);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--wash);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* Hide scrollbar utility (used in horizontal nav bars) */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Text selection colors */
+::selection {
+  background-color: var(--brand-soft);
+  color: var(--brand-deep);
+}
+
+/* Range input – webkit track & thumb */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--line);
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--brand-deep);
+  margin-top: -6px;
+  cursor: pointer;
+  transition: box-shadow 0.15s;
+}
+input[type="range"]:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px var(--brand-soft);
+}
+
+/* VFA Grader merged scale control: the A/B/C coloured bar IS the track */
+.vfa-range {
+  --vfa-gradient: linear-gradient(
+    to right,
+    var(--grade-a) 0%,
+    var(--grade-a) 41.6667%,
+    var(--grade-b) 41.6667%,
+    var(--grade-b) 66.6667%,
+    var(--grade-c) 66.6667%,
+    var(--grade-c) 100%
+  );
+}
+input[type="range"].vfa-range::-webkit-slider-runnable-track {
+  height: 12px;
+  border-radius: 9999px;
+  background: var(--vfa-gradient);
+}
+input[type="range"].vfa-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 3px solid var(--ink);
+  margin-top: -8px;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  transition: box-shadow 0.15s;
+}
+input[type="range"].vfa-range:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px var(--brand-soft);
+}
+input[type="range"].vfa-range::-moz-range-track {
+  height: 12px;
+  border-radius: 9999px;
+  background: var(--vfa-gradient);
+}
+input[type="range"].vfa-range::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 3px solid var(--ink);
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+input[type="range"].vfa-range:focus-visible::-moz-range-thumb {
+  box-shadow: 0 0 0 3px var(--brand-soft);
+}
+
+/* Smooth gradient separator used in hero section */
+.gradient-mask-b {
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+}
+
+/* Animated gradient shimmer for hero badge */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Subtle pulse ring for active status dots */
+@keyframes ping-soft {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%       { transform: scale(1.5); opacity: 0; }
+}
+.animate-ping-soft {
+  animation: ping-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
