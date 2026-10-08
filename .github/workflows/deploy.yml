@@ -47,7 +47,7 @@ jobs:
 
       - name: Build site
         env:
-          NEXT_PUBLIC_BASE_PATH: ""
+          NEXT_PUBLIC_BASE_PATH: "/latexguard-web"
         run: npm run build
 
       - name: Upload artifact

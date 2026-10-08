@@ -26,7 +26,7 @@ const ibmMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://SLIIT-IT4010-2026.github.io"),
+  metadataBase: new URL("https://kaveeshaheshan.github.io/latexguard-web"),
   title: {
     default: `${siteConfig.brandName} | ${siteConfig.title}`,
     template: `%s | ${siteConfig.brandName}`
